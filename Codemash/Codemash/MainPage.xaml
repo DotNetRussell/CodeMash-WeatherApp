@@ -1,0 +1,69 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:codemash="clr-namespace:Codemash"
+             mc:Ignorable="d"
+             x:Class="Codemash.MainPage">
+    <ContentPage.Resources>
+        <codemash:WeatherIconConverter x:Key="WeatherIconConverter" />
+    </ContentPage.Resources>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="100"/>
+            <RowDefinition Height="Auto" />
+            <RowDefinition />
+        </Grid.RowDefinitions>
+        <Label Text="Current Location:" Grid.Row="0" FontSize="30" />
+        <StackLayout Orientation="Horizontal"
+                     VerticalOptions="End"
+                     HeightRequest="100"
+                     Grid.Row="1">
+            <Image Source="{Binding CurrentLocation.Condition}"
+                   HeightRequest="100"
+                   WidthRequest="100" />
+            <Label Text="{Binding CurrentLocation.Location}"
+                   FontSize="30"
+                   VerticalTextAlignment="Center"
+                   FontAttributes="Bold" />
+            <Label Text=":"
+                   VerticalTextAlignment="Center"
+                   Margin="-5,0,0,0"
+                   FontSize="30" />
+            <Label Text="{Binding CurrentLocation.Temp}"
+                   VerticalTextAlignment="Center"
+                   FontSize="30" />
+        </StackLayout>
+        <SearchBar SearchCommand="{Binding SearchCommand}"
+                   HeightRequest="30"
+                   Placeholder="Zipcode"
+                   Grid.Row="2"
+                   Text="{Binding SearchText}" />
+        <CollectionView ItemsSource="{Binding Weathers}"
+                        Grid.Row="3">
+            <CollectionView.ItemTemplate>
+                <DataTemplate>
+                    <StackLayout Orientation="Horizontal"
+                                 Margin="0,20,0,0">
+                        <Image Source="{Binding Condition}"
+                               HeightRequest="100"
+                               WidthRequest="100" />
+                        <Label Text="{Binding Location}"
+                               FontSize="30"
+                               VerticalTextAlignment="Center"
+                               FontAttributes="Bold" />
+                        <Label Text=":"
+                               VerticalTextAlignment="Center"
+                               Margin="-5,0,0,0"
+                               FontSize="30" />
+                        <Label Text="{Binding Temp}"
+                               VerticalTextAlignment="Center"
+                               FontSize="30" />
+                    </StackLayout>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
+    </Grid>
+</ContentPage>
